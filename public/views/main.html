@@ -1,0 +1,119 @@
+<!-- View Content -->
+<!-- Lista de tarefas em progresso -->
+<!-- List of main in progress -->
+
+<section ng-controller="AulasController" class="container-fluid">
+  <hr>
+  <span class="position-button">
+    <button class="btn btn-primary btn-just-icon fixed-button hidden-md hidden-sm hidden-lg" data-toggle="modal" data-target="#newaulasModal">
+      <i class="material-icons">add</i>
+    </button>
+  </span>
+  <div class="modal fade" id="newaulasModal" tabindex="-1" role="dialog" aria-labelledby="newaulasModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h5 class="modal-title" id="myModalLabel">New aulas</h5>
+        </div>
+        <div class="modal-body">
+          <div class="md-form input-group">
+            <span class="input-group-addon">
+              <i class="material-icons">turned_in</i>
+            </span>
+            <input id="aulasTitle" type="text" class="form-control" name="title" ng-model="newaulas.title" placeholder="Título">
+          </div>
+          <div class="md-form input-group">
+            <span class="input-group-addon">
+              <i class="material-icons">subject</i>
+            </span>
+            <input id="aulasDescription" type="text" class="form-control" name="description" ng-model="newaulas.description" placeholder="Descrição">
+          </div>
+          <div class="md-form input-group">
+            <span class="input-group-addon">
+              <i class="material-icons">date_range</i>
+            </span>
+            <input class="form-control" type="date" ng-model="newaulas.aulasDate"/>
+            <input class="form-control" type="time" ng-model="newaulas.aulasDate"/>
+          </div>
+          <hr>
+          <div class="text-right">
+            <button data-dismiss="modal" class="btn btn-warning btn-just-icon"><i class="material-icons">not_interested</i></button>
+            <button data-dismiss="modal" ng-click="createaulas(newaulas)" class="btn btn-success btn-just-icon"><i class="material-icons">playlist_add</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 text-align="center">VAMOS COMEÇAR A MUDAR</h3>
+  <div class="row padding-top">
+    <div class="col-md-4 col-lg-3 col-xs-12 col-sm-6">
+      <div class="md-form input-group search-input">
+        <span class="input-group-addon">
+          <i class="material-icons text-white">search</i>
+        </span>
+        <input id="search" ng-model="search" class="form-control text-white" type="text" name="search" autocomplete="off" placeholder="Pesquise">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div ng-repeat="aulas in main |  filter:search | orderBy: '-_id'" ng-if="aulas.progress == 'progress'">
+      <div class="row hidden-sm hidden-md hidden-lg">
+        <br>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card hoverable container-fluid ox-card-list {{aulas.dateCompare <= date && 'card-danger'}} {{aulas.dateCompareDay <= dateDay && 'card-alert'}}">
+          <div class="card-block">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+              <label class="label label-info" ng-hide="aulas.active == 'true'">Date: {{aulas.aulasDate}}</label>
+            </div>
+            <label ng-show="aulas.active == 'true'"><br>Title</label>
+            <h4 class="card-title" ng-hide="aulas.active == 'true'" ng-if="aulas.open == 'false' && aulas.title.length > 25|| (aulas.title.length > 25 && aulas.open == null)">{{aulas.title.slice(0,25)}} ...</h4>
+            <h4 class="card-title" ng-hide="aulas.active == 'true'" ng-if="aulas.open == 'false' && aulas.title.length < 25 ||aulas.open == 'true' || (aulas.title.length < 25 && aulas.open == null)">{{aulas.title}}</h4>
+            <div class="animate-show md-form" ng-show="aulas.active == 'true'">
+              <input id="aulasDescriptionUpdate" class="" type="text" name="titleUpdate" ng-model="aulas.title" value="{{aulas.title}}">
+            </div>
+            <p ng-hide="aulas.active == 'true'" ng-if="aulas.open == 'false' && aulas.description.length > 30 || (aulas.description.length > 30 && aulas.open == null)">
+              {{aulas.description.slice(0,30)}} ...
+            </p>
+            <p ng-hide="aulas.active == 'true'" ng-if="aulas.open == 'false' && aulas.description.length < 30 || aulas.open == 'true' || (aulas.description.length < 30 && aulas.open == null)">
+              {{aulas.description}}
+            </p>
+            <label class="input-group" ng-show="aulas.active == 'true'">Description</label>
+            <div ng-show="aulas.active == 'true'">
+              <textarea id="aulasDescriptionUpdate" class="md-textarea" type="text" name="descriptionUpdate" ng-model="aulas.description">{{aulas.description}}</textarea>
+            </div>
+            <label class="input-group" ng-show="aulas.active == 'true'">
+              Date
+            </label>
+            <div ng-show="aulas.active == 'true'">
+              <input id="aulasDateUpdate" class="md-form" type="text" name="aulasDateUpdate" value="{{aulas.aulasDate}}" ng-model="aulas.aulasDate">
+            </div>
+
+            <button title="Delete" class="btn btn-danger btn-just-icon" ng-click="removeaulas(aulas)">
+              <i class="material-icons">delete</i>
+            </button>
+
+            <button title="Edit" class="btn btn-primary btn-just-icon" ng-show="aulas.active != 'true'" ng-click="aulasActive(aulas,'true')">
+              <i class="material-icons">mode_edit</i>
+            </button>
+
+            <button title="Cancel" ng-show="aulas.active == 'true'" ng-click="aulasActive(aulas,'false')" class="btn btn-warning btn-just-icon"><i class="material-icons">not_interested</i></button>
+
+            <button title="Save" ng-show="aulas.active == 'true'" ng-click="saveaulas(aulas)" class="btn btn-primary btn-just-icon"><i class="material-icons">save</i></button>
+
+            <button title="Done" ng-show="aulas.active == 'false'" ng-click="aulasProgress(aulas,'done')" class="btn btn-success btn-just-icon">
+              <i class="material-icons">done</i>
+            </button>
+            <button title="Visibility" ng-show="aulas.active == 'false' && (aulas.open == 'false' || aulas.open == null)" ng-click="aulas.open='true'" class="btn btn-info btn-just-icon">
+              <i class="material-icons">visibility</i>
+            </button>
+            <button title="Visibility Off" ng-show="aulas.active == 'false' && aulas.open == 'true'" ng-click="aulas.open='false'" class="btn btn-info btn-just-icon">
+              <i class="material-icons">visibility_off</i>
+            </button>
+          </div>            
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
