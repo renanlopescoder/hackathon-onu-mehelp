@@ -11,10 +11,10 @@ var schema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-  	valor : {
+  valor : {
 		type: String,
 		required: true
-	}
+	},
 	dataDisponivel : {
 		type: String,
 		required: true

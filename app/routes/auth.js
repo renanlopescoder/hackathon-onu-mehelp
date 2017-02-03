@@ -5,6 +5,7 @@ module.exports = function (app){
 	app.post('/autenticar', api.autentica);
   app.post('/createUser', api.createUser);
 
-  app.use('/*', api.verificaToken); // Verificar após autenticação ordem necessária e aplicando a qualquer verbo http com use
+  // app.use('/*', api.verificaToken); 
+  // Verificar após autenticação ordem necessária e aplicando a qualquer verbo http com use
   
 };

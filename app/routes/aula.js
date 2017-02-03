@@ -12,5 +12,5 @@ module.exports = function (app){
 
 	app.delete('/removeAula/:id', api.removePorId);
 
-	app.get('*', routes.index);
+	// app.get('*', routes.index);
 };

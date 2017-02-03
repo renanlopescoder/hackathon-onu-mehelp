@@ -4,8 +4,7 @@ var api = {};
 var model = mongoose.model('Aula'); // Igual ao nome dado ao Model
 
 api.lista = function (req, res){
-	var userId = req.get('aulaId');
-	model.find({aulaId: aulaId},function(error, aula){ 
+	model.find(function(error, aula){ 
 		if(error){ // caso erro mandamos um erro
 			res.status(500).json(error);
 		}

@@ -12,9 +12,10 @@ var load = require('express-load');
 
 	load('app/models') // Irá carregar os modelos como no hibernate Java
 	.then('app/api')
-	.then('app/routes/auth.js')
 	.then('app/routes')
 	.into(app);
+
+// .then('app/routes/auth.js')
 
 	module.exports = app; // tornar publico
 
