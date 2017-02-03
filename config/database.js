@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 
 // Heroku open-source access database
 // Acesso a base de dados open-source pelo Heroku
-mongoose.connect('mongodb://opentaskmanager:openpassword@ds161018.mlab.com:61018/heroku_6gzfjvz0');
+mongoose.connect('mongodb://mehelp:mehelp123@ds139909.mlab.com:39909/heroku_275n5ss9');
 
 // Função para imprimir no console se a conxão com o banco foi efetuada
 // Function to print in console if the database connection was a success
