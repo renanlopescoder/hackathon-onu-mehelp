@@ -42,7 +42,8 @@ services.factory('auth', function() {
       return  {
         headers : {
             'Autorization' : JSON.parse(window.localStorage.getItem('user')).token,
-            'userId' : JSON.parse(window.localStorage.getItem('user')).user_id
+            'userId' : JSON.parse(window.localStorage.getItem('user')).user_id,
+            'username' : JSON.parse(window.localStorage.getItem('user')).user_username
           }
       };
   };

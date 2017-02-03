@@ -1,0 +1,13 @@
+<h3 ng-controller="UserController">Olá, {{user.username}}</h3>
+<div ng-controller="AulaController" class="col-md-2 painel-animado" ng-repeat="aula in aulas | filter: filtro" titulo="{{aula.titulo}}">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title text-center">{{aula.titulo}}</h3>
+		</div>
+		<div class="panel-body">
+		<p>Valor: {{aula.valor}}</p>
+		<p>Data Disponivel: {{aula.dataDisponivel}}</p>
+		<p>Horario: De {{aula.horaInicio}} à {{aula.horaFim}}</p>
+		</div>
+	</div>
+</div>

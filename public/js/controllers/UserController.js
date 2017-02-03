@@ -12,10 +12,10 @@ mehelpApp.controller('UserController', function($scope, $http, auth) {
           window.localStorage.setItem('user', JSON.stringify(response.data));
           console.log('Logado com Sucesso ' + user.username);
           var token = auth.getUser();
-          window.location = '/#/list';
+          window.location = '/listAula';
         };
         if(response.status == 401){
-          window.location = '/#/';
+          window.location = '/';
         }
 
       }, function (error){

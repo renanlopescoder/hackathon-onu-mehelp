@@ -11,7 +11,7 @@ mehelpApp.controller('AulasController', function ($scope, $routeParams, $http, $
 // Initial function to get the list of aulas
 
   function init() {
-    $http.get('/list', user)
+    $http.get('/listAula', user)
       .success(function (retorno) {
         for(aulas in retorno){
           retorno[aulas].dateCompare = dateFormat.dateFormatCompare(retorno[aulas].aulasDate);

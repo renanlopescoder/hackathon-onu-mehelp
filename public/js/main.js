@@ -1,12 +1,16 @@
-var taskApp = angular.module('taskApp',['ngRoute','services','directives']);
 var mehelpApp = angular.module('mehelpApp',['ngRoute','services','directives']);
 
 mehelpApp.config(['$routeProvider','$locationProvider',
   function($routeProvider, $locationProvider) {
 
-  $routeProvider.when('/list', {
-      templateUrl : 'views/main.html',
-      controller : 'AulasController'
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
+
+  $routeProvider.when('/listAula', {
+      templateUrl : 'views/aulas.html',
+      controller : 'AulaController'
    }).when('/listToday', {
        templateUrl : 'views/task/task-today-list.html',
        controller : 'TaskController'
